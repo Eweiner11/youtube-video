@@ -13,8 +13,8 @@ export default function GridDND() {
   const { videos, setVideos } = useVideo();
 
   useEffect(() => {
-    const videoArr: any = new Array(videos.length).fill(null);
-    setItems(videoArr.map((_: any, idx: number) => idx));
+    const videoArr: null[] = new Array(videos.length).fill(null);
+    setItems(videoArr.map((_: null, idx: number) => idx));
   }, [videos]);
 
   // function swapArrayItems(arr: any, index1: any, index2: any) {
@@ -23,10 +23,11 @@ export default function GridDND() {
   //   return result;
   // }
   function onChange(
+    _: string,
     // sourceId: string,
     sourceIndex: number,
     targetIndex: number,
-  ) {
+  ): void {
     const nextState = swap(items, sourceIndex, targetIndex);
     setItems(nextState);
     const videoState = swap(videos, sourceIndex, targetIndex);

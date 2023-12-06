@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import ReactPlayer from 'react-player';
+import React, { useRef } from "react";
+import ReactPlayer from "react-player";
 
 interface videoPlayer {
   url?: string;
-  embedCode:string;
+  embedCode: string;
   volume: number;
 }
 
-const VideoPlayerWrapper = ({ url,embedCode, volume }: videoPlayer) => {
+const VideoPlayerWrapper = ({ url, embedCode, volume }: videoPlayer) => {
   // This container style will maintain the 16:9 aspect ratio
 
   const playerRef = useRef<any>(null);
@@ -16,22 +16,21 @@ const VideoPlayerWrapper = ({ url,embedCode, volume }: videoPlayer) => {
   //   playerRef.current.seekTo(67.758406, 'seconds');
   // }, [playerRef.current]);
 
-
   const playerWrapperStyle: React.CSSProperties = {
-    position: 'relative',
-    paddingTop: '56.25%', // 16:9 aspect ratio
+    position: "relative",
+    paddingTop: "56.25%", // 16:9 aspect ratio
     height: 0, // This makes the padding top act as the height
-    width: '100%',
-    objectFit: "cover"
+    width: "100%",
+    objectFit: "cover",
   };
 
   const playerStyle: React.CSSProperties = {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    objectFit: "cover"
+    objectFit: "cover",
   };
 
   const renderPlayer = () => {
@@ -40,8 +39,8 @@ const VideoPlayerWrapper = ({ url,embedCode, volume }: videoPlayer) => {
         <ReactPlayer
           url={url}
           style={playerStyle}
-          width='100%'
-          height='100%'
+          width="100%"
+          height="100%"
           playing
           controls
           volume={volume}
@@ -59,11 +58,7 @@ const VideoPlayerWrapper = ({ url,embedCode, volume }: videoPlayer) => {
     return <p>No video URL or embed code provided.</p>;
   };
 
-  return (
-    <div style={playerWrapperStyle}>
-      {renderPlayer()}
-    </div>
-  );
+  return <div style={playerWrapperStyle}>{renderPlayer()}</div>;
 };
 
 export default VideoPlayerWrapper;
