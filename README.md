@@ -1,4 +1,4 @@
-# job-search-frontend
+
 
 Empty project.
 
@@ -7,13 +7,13 @@ Empty project.
 First install dependencies:
 
 ```sh
-npm install
+Yarn
 ```
 
 To run in hot module reloading mode:
 
 ```sh
-npm start
+Yarn run dev
 ```
 
 To create a production build:
