@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { useState } from "react";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "react-beautiful-dnd";
 
 // Define the initial grid items
 const initialGridItems = [
-  { id: '1', content: '1' },
-  { id: '2', content: '2' },
-  { id: '3', content: '3' },
-  { id: '4', content: '4' },
+  { id: "1", content: "1" },
+  { id: "2", content: "2" },
+  { id: "3", content: "3" },
+  { id: "4", content: "4" },
 ];
 
 const GridComponent = () => {
@@ -15,7 +20,11 @@ const GridComponent = () => {
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
 
-    if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
+    if (
+      !destination ||
+      (destination.droppableId === source.droppableId &&
+        destination.index === source.index)
+    ) {
       return;
     }
 
@@ -34,9 +43,9 @@ const GridComponent = () => {
             {...provided.droppableProps}
             ref={provided.innerRef}
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '8px',
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "8px",
             }}
           >
             {gridItems.map((item, index) => (
@@ -48,15 +57,15 @@ const GridComponent = () => {
                     {...provided.dragHandleProps}
                     style={{
                       ...provided.draggableProps.style,
-                      userSelect: 'none',
-                      padding: '20px',
-                      margin: '0',
-                      minHeight: '50px',
-                      backgroundColor: '#f4f4f4',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderRadius: '4px',
+                      userSelect: "none",
+                      padding: "20px",
+                      margin: "0",
+                      minHeight: "50px",
+                      backgroundColor: "#f4f4f4",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: "4px",
                     }}
                   >
                     {item.content}
