@@ -32,6 +32,7 @@ export default function GridDND() {
     setItems(nextState);
     const videoState = swap(videos, sourceIndex, targetIndex);
     setVideos(videoState);
+    console.log("items:", items);
   }
 
   return (
@@ -63,4 +64,3 @@ export default function GridDND() {
     </div>
   );
 }
-
