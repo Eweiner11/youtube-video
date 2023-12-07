@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { StyledTextField } from "../StyledComponents";
 import AddIcon from "@mui/icons-material/Add";
 import { v4 as uuidv4 } from "uuid";
+import AddToQueueOutlinedIcon from '@mui/icons-material/AddToQueueOutlined';
 
 const VideoInputModal = () => {
   const { addVideo, getVideoInfo } = useVideo();
@@ -60,8 +61,8 @@ const VideoInputModal = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} style={{ padding: "20px" }}>
+    <div>
+      <form onSubmit={handleSubmit} style={{ padding: '20px' }}>
         <Modal
           openModal={addModal}
           title="Add Video"
@@ -79,17 +80,16 @@ const VideoInputModal = () => {
           />
         </Modal>
       </form>
-      <Tooltip title={"add video"} placement="left">
-        <AddIcon
-          style={{ cursor: "pointer" }}
-          fontSize="large"
-          onClick={(e) => {
+      <Tooltip title={'add video'} placement='left'>
+        <AddToQueueOutlinedIcon
+          style={{ cursor: 'pointer',fontSize:'100px' }}
+          onClick={(e:any) => {
             e.preventDefault();
             toggleAddModal(true);
           }}
         />
       </Tooltip>
-    </>
+    </div>
   );
 };
 

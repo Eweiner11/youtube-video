@@ -11,7 +11,6 @@ export const VideoContext = createContext<VideoContextState | undefined>(undefin
 export const VideoProvider = ({ children }: VideoProviderProps): ReactElement => {
     const [videos, setVideos] = useState<Video[]>([]);
     const [isFullScreen, setFullScreen] = useState(false)
-    const [volumes, setVolumes] = useState<number[]>([0, 0, 0, 0])
 
     const changeVolume = (num: number, idx: number) => {
         const copy = videos.slice()
@@ -86,7 +85,6 @@ export const VideoProvider = ({ children }: VideoProviderProps): ReactElement =>
         toggleFullScreen,
         getVideoInfo,
         updateVideo,
-        volumes
     };
 
     return (

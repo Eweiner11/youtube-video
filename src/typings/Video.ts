@@ -7,17 +7,16 @@ export interface Video {
   playing?: boolean;
 }
 
-export interface VideoContextState {
-  videos: Video[];
-  setVideos: React.Dispatch<React.SetStateAction<Video[]>>;
-  updateVideo: (key: keyof Video, value: any, idx: number) => void;
-  changeVolume: (num: number, idx: number) => void;
-  removeVideo: (index: number) => void;
-  addVideo: (video: Video) => void;
-  getVideoInfo: (videoUrl: string) => Promise<VideoInfo>;
-  isFullScreen: boolean;
-  toggleFullScreen: () => void;
-  volumes: number[];
+  export interface VideoContextState {
+    videos: (Video)[];
+    setVideos: React.Dispatch<React.SetStateAction<Video[]>>;
+    updateVideo:(key:keyof Video,value:any,idx:number)=>void
+    changeVolume: (num: number, idx: number) => void;
+    removeVideo: (index: number) => void;
+    addVideo: (video: Video) => void;
+    getVideoInfo: (videoUrl: string) => Promise<VideoInfo>; 
+    isFullScreen: boolean;
+    toggleFullScreen: () => void;
 }
 
 export interface VideoInfo {
