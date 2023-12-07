@@ -1,13 +1,11 @@
-import MainContent from '../layout/MainContent';
-import { useVideo } from '../contexts/VideoListContext';
+import MainContent from '../../layout/MainContent';
+import { useVideo } from '../../contexts/VideoListContext';
 import VideoPlayerWrapper from './VideoPlayerWrapper';
-import { useEffect, useRef } from 'react';
+import { Video } from '../../typings/Video';
 
 const VideoGrid = () => {
-  const { videos,volumes } = useVideo();
 
-
-
+  const { videos} = useVideo();
   const gridStyle = {
     gridTemplateColumns: `repeat(${Math.ceil(Math.sqrt(videos.length))}, 1fr)`,
     gridTemplateRows: `repeat(${Math.ceil(videos.length / Math.ceil(Math.sqrt(videos.length)))}, 1fr)`,
@@ -15,9 +13,8 @@ const VideoGrid = () => {
 
   return (
     <MainContent  style={gridStyle}>
-      {videos.map((video:(string|null), index:number) => (
-        //need to add uniqu key to each video
-        <VideoPlayerWrapper key = {video} url = {video|| undefined} volume = {volumes[index]} embedCode=''/>
+      {videos?.map((video:Video,idx:number) => (
+        <VideoPlayerWrapper key = {video?.url} videoConfig={video} idx={idx} />
       ))}
     </MainContent>
   );

@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { VideoProvider } from './contexts/VideoListContext'
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
       <>
     <VideoProvider>
     <App />
+    <ToastContainer position="bottom-right" pauseOnHover={false} />
     </VideoProvider>
     </>
 )

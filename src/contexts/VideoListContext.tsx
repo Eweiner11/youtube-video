@@ -1,66 +1,91 @@
 import { createContext, useContext, useState, ReactNode, ReactElement } from 'react';
 
-interface VideoContextState {
-    videos: (string)[];
-    setVideos: React.Dispatch<React.SetStateAction<string[]>>;
-    removeVideo: (index: number) => void;
-    addVideo: (video: string) => void;
-    isFullScreen:boolean;
-    toggleFullScreen:() => void;
-    changeVolume:(num:number,idx:number)=>void;
-    volumes:number[];
-}
 
 interface VideoProviderProps {
     children: ReactNode;
 }
-interface Video {
-    url: string ;
-    volume: number;
-    seekto?:number
-  }
-
+import { Video,VideoContextState } from '../typings/Video';
+import axios from 'axios';
 export const VideoContext = createContext<VideoContextState | undefined>(undefined);
 
 export const VideoProvider = ({ children }: VideoProviderProps): ReactElement => {
-    const [videos, setVideos] = useState<(string)[]>([]);
-    const [isFullScreen,setFullScreen] = useState(false)
-    const [volumes,setVolumes] = useState<number[]>([0,0,0,0])
+    const [videos, setVideos] = useState<Video[]>([]);
+    const [isFullScreen, setFullScreen] = useState(false)
+    const [volumes, setVolumes] = useState<number[]>([0, 0, 0, 0])
 
-
-    const changeVolume = (num:number,idx:number) =>{
-        const copy = volumes.slice()
-        copy[idx] = num
-        setVolumes(copy)
+    const changeVolume = (num: number, idx: number) => {
+        const copy = videos.slice()
+        copy[idx].volume = num
+        setVideos(copy)
     }
 
-      
+    async function getVideoInfo(videoUrl: string) {
+        try {
+          const videoId = new URL(videoUrl).searchParams.get('v');
+          const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+            params: {
+              key: 'AIzaSyDww1kUVYoCUFQiSFQJZbGqdtkUbyCYnUs',
+              id: videoId,
+              part: 'snippet,contentDetails,statistics', 
+            },
+          });
+
+          if (response.status === 200) {
+            const videoInfo = response.data.items[0]; 
+            return videoInfo
+            // Print the video information
+            console.log('Video Title:', videoInfo.snippet.title);
+            console.log('Video Description:', videoInfo.snippet.description);
+            console.log('Video Views:', videoInfo.statistics.viewCount);
+            console.log('Video Duration:', videoInfo.contentDetails.duration);
+          } else {
+            console.error('Error fetching video information:', response.statusText);
+          }
+        } catch (error: any) {
+          console.error('Error:', error.message);
+        }
+      }
+
     const removeVideo = (index: number) => {
         setVideos((currentVideos) => currentVideos.filter((_, i) => i !== index));
     };
+    const updateVideo = <K extends keyof Video>(key: K, value: Video[K], idx: number) => {
+        const copy: Video[] = [...videos];
+        const updatedVideo: Video = { ...copy[idx] };
+        updatedVideo[key] = value;
+        copy[idx] = updatedVideo;
+        setVideos(copy);
+      }
+
+      
     const toggleFullScreen = () => {
-        setFullScreen((prev:boolean)=>!prev)
+        setFullScreen((prev: boolean) => !prev)
     }
-   
-    const addVideo = (video: string) => {
-        setVideos((currentVideos) => {
+
+    const addVideo = async (video: Video) => {
+        try {
+          setVideos((currentVideos) => {
             // Check to ensure no more than 4 videos
             if (currentVideos.length >= 4) {
-                alert('You can only add up to 4 videos.');
-                return currentVideos;
+              alert('You can only add up to 4 videos.');
+              return currentVideos;
             }
-            return [...currentVideos, video];
-        });
-    };
-
+            return [...currentVideos,video]
+          });
+        } catch (error:any) {
+          console.error('Error:', error.message);
+        }
+      };
     const providerValue = {
         videos,
         setVideos,
         removeVideo,
         addVideo,
         isFullScreen,
-        toggleFullScreen,
         changeVolume,
+        toggleFullScreen,
+        getVideoInfo,
+        updateVideo,
         volumes
     };
 
@@ -73,10 +98,10 @@ export const VideoProvider = ({ children }: VideoProviderProps): ReactElement =>
 
 export function useVideo(): VideoContextState {
     const context = useContext(VideoContext);
-  
+
     if (context === undefined) {
-      throw new Error('useVideo must be used within a VideoProvider');
+        throw new Error('useVideo must be used within a VideoProvider');
     }
-  
+
     return context;
 }

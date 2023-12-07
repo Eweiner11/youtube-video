@@ -23,9 +23,6 @@ const MainLayout = ({ sidebar, main }: MainLayoutProps) => {
       <aside className={`sidebar ${isSidebarOpen ? '' : 'closed'}`}>
         {sidebar}
       </aside>
-      <button onClick={toggleSidebar} className="toggle-sidebar">
-        {isSidebarOpen ? 'Close' : 'Open'}
-      </button>
     </div>
   );
 };
