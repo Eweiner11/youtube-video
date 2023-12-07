@@ -41,7 +41,11 @@ export default function GridDND() {
           id="items"
           boxesPerRow={2} /* Adjust if necessary */
           rowHeight={50} /* Adjust if necessary */
-          style={{ height: 50 * Math.ceil(items.length / 2), gap: "10px" }}
+          style={{
+            height: 50 * Math.ceil(items.length / 2),
+            gap: "10px",
+            width: 200,
+          }}
         >
           {items.map((item: number) => {
             const isDragging = false;
@@ -59,3 +63,4 @@ export default function GridDND() {
     </div>
   );
 }
+
