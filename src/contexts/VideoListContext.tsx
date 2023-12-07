@@ -30,16 +30,11 @@ export const VideoContext = createContext<VideoContextState | undefined>(
   undefined,
 );
 
-export const VideoProvider = ({
-  children,
-}: VideoProviderProps): ReactElement => {
-  const [videos, setVideos] = useState<string[]>([
-    "https://www.youtube.com/watch?v=qTK7MbOgrTI",
-    "https://www.youtube.com/watch?v=WNcsUNKlAKw",
-    "https://www.youtube.com/watch?v=bgJLEOld59E",
-  ]);
-  const [isFullScreen, setFullScreen] = useState(false);
-  const [volumes, setVolumes] = useState<number[]>([0, 0, 0, 0]);
+
+export const VideoProvider = ({ children }: VideoProviderProps): ReactElement => {
+    const [videos, setVideos] = useState<(string)[]>([]);
+    const [isFullScreen,setFullScreen] = useState(false)
+    const [volumes,setVolumes] = useState<number[]>([0,0,0,0])
 
   const changeVolume = (num: number, idx: number) => {
     const copy = volumes.slice();
