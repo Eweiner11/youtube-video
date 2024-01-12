@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
-import { useVideo } from "../contexts/VideoListContext";
+import { useVideo } from "../../contexts/VideoListContext";
 
 interface VolumeSliderTypes {
   idx: number;
@@ -41,4 +41,3 @@ export default function VolumeSlider({ idx, initialVal }: VolumeSliderTypes) {
     </Box>
   );
 }
-

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useVideo } from "../contexts/VideoListContext";
+import { useVideo } from "../../contexts/VideoListContext";
 
 const VideoInput = () => {
   const { addVideo } = useVideo();

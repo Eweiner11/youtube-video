@@ -1,21 +1,20 @@
 import "./App.css";
 import MainLayout from "./layout/MainLayout";
-import VideoGrid from "./components/VideoGrid";
+import VideoPlayerGrid from "./components/VideoPlayerGrid";
 import { useVideo } from "./contexts/VideoListContext";
-import VideoInput from "./components/VideoInput";
+import VideoInput from "./components/SideBar/VideoInput";
 import { Tooltip } from "@mui/material";
-import VolumeSlider from "./components/VolumeSlider";
-import GridDND from "./components/GridDND";
+import VolumeSlider from "./components/SideBar/VolumeSlider";
+import SidebarGridDND from "./components/SideBar/SidebarGridDND";
 
 function App() {
-  return <MainLayout sidebar={<TestButtons />} main={<VideoGrid />} />;
+  return <MainLayout sidebar={<TestButtons />} main={<VideoPlayerGrid />} />;
 }
 export default App;
 
 const TestButtons = () => {
   const { videos, setVideos, toggleFullScreen, removeVideo, volumes } =
     useVideo();
-
 
   const oneVid = ["https://www.youtube.com/watch?v=YacJX35CJ4Y"];
   const twoVid = [
@@ -53,8 +52,7 @@ const TestButtons = () => {
           </>
         );
       })}
-      <GridDND />
+      <SidebarGridDND />
     </>
   );
 };
-
