@@ -5,7 +5,7 @@ import {
   GridItem,
   swap,
 } from "react-grid-dnd";
-import { useVideo } from "../contexts/VideoListContext";
+import { useVideo } from "../../contexts/VideoListContext";
 import { Paper } from "@mui/material";
 
 export default function GridDND() {
@@ -59,4 +59,3 @@ export default function GridDND() {
     </div>
   );
 }
-
